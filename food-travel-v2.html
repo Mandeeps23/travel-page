@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saveur — Food Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-deep:   #0E1F18;
+  --green-mid:    #163325;
+  --green-accent: #1E4D35;
+  --gold:         #C9A84C;
+  --gold-light:   #E8C97A;
+  --ivory:        #F5F0E8;
+  --ivory-dim:    rgba(245,240,232,0.6);
+  --ivory-muted:  rgba(245,240,232,0.35);
+  --red-spice:    #B84A3A;
+  --white:        #FFFFFF;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--green-deep);
+  color: var(--ivory);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem;
+  height: 68px;
+  border-bottom: 1px solid var(--ivory-muted);
+  background: rgba(14,31,24,0.92);
+  backdrop-filter: blur(14px);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory);
+}
+
+.logo sup {
+  font-size: 0.5rem;
+  vertical-align: super;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.nav-links {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ivory-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.nav-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  background: var(--gold);
+  padding: 0.55rem 1.4rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-btn:hover { background: var(--gold-light); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 68px;
+  position: relative;
+}
+
+/* Left: editorial text */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 3rem 5rem 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.eyebrow-line {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+.eyebrow-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 5.5vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ivory);
+  margin-bottom: 1.75rem;
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+  display: block;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--ivory-dim);
+  line-height: 1.75;
+  max-width: 380px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; align-items: center; margin-bottom: 3.5rem;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--green-deep);
+  padding: 0.85rem 2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+}
+
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.btn-ghost {
+  color: var(--ivory-dim);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem;
+  transition: color 0.2s;
+}
+
+.btn-ghost:hover { color: var(--ivory); }
+
+.hero-stats {
+  display: flex; gap: 0;
+  border-top: 1px solid var(--ivory-muted);
+  padding-top: 2rem;
+}
+
+.stat {
+  flex: 1;
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--ivory-muted);
+  margin-right: 1.5rem;
+}
+
+.stat:last-child { border-right: none; margin-right: 0; }
+
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.stat-l {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ivory-muted);
+}
+
+/* Right: photo collage */
+.hero-visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--green-deep) 0%, transparent 30%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.7;
+}
+
+.hero-pill {
+  position: absolute;
+  z-index: 2;
+  background: rgba(14,31,24,0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--ivory-muted);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+}
+
+.hero-pill-top {
+  top: 2.5rem; right: 2rem;
+}
+
+.hero-pill-bottom {
+  bottom: 3rem; right: 2rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+
+.pill-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.2rem;
+}
+
+.pill-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ivory);
+}
+
+.pill-thumb {
+  width: 44px; height: 44px;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pill-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── MARQUEE STRIP ── */
+.marquee-strip {
+  background: var(--gold);
+  padding: 0.65rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-flex;
+  gap: 0;
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-item {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  padding: 0 2.5rem;
+  display: inline-flex; align-items: center; gap: 1.5rem;
+}
+
+.marquee-dot {
+  width: 4px; height: 4px;
+  background: var(--green-deep);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── DESTINATIONS — MENU STYLE ── */
+.destinations {
+  padding: 6rem 3.5rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ivory-muted);
+}
+
+.section-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ivory);
+}
+
+h2 em { font-style: italic; font-weight: 400; color: var(--ivory-dim); }
+
+.link-all {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem;
+  flex-shrink: 0;
+  margin-left: 2rem;
+  transition: gap 0.2s;
+}
+
+.link-all:hover { gap: 0.7rem; }
+
+/* Menu-style destination rows */
+.menu-list { display: flex; flex-direction: column; }
+
+.menu-item {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto auto;
+  align-items: center;
+  gap: 1.5rem 2rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--ivory-muted);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+
+.menu-item:first-child { border-top: 1px solid var(--ivory-muted); }
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  inset: 0 -1.5rem;
+  background: var(--green-accent);
+  opacity: 0;
+  border-radius: 4px;
+  transition: opacity 0.25s;
+  z-index: 0;
+}
+
+.menu-item:hover::before { opacity: 1; }
+.menu-item > * { position: relative; z-index: 1; }
+
+.menu-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ivory-muted);
+  text-align: right;
+}
+
+.menu-content { display: flex; align-items: center; gap: 1.25rem; }
+
+.menu-thumb {
+  width: 60px; height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.menu-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.menu-item:hover .menu-thumb img { transform: scale(1.08); }
+
+.menu-info {}
+
+.menu-country {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.2rem;
+}
+
+.menu-city {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ivory);
+  margin-bottom: 0.25rem;
+  line-height: 1;
+}
+
+.menu-dish {
+  font-size: 0.8rem;
+  color: var(--ivory-dim);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.menu-tags {
+  display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end;
+}
+
+.mtag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  border: 1px solid var(--ivory-muted);
+  color: var(--ivory-dim);
+}
+
+.mtag.hot { border-color: var(--red-spice); color: #E87A6B; }
+.mtag.veg { border-color: #3A8C5C; color: #6DC990; }
+.mtag.sweet { border-color: var(--gold); color: var(--gold-light); }
+
+.menu-arrow {
+  font-size: 0.9rem;
+  color: var(--ivory-muted);
+  transition: color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.menu-item:hover .menu-arrow { color: var(--gold); transform: translateX(4px); }
+
+/* ── FEATURE STRIP ── */
+.feature-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 60vh;
+}
+
+.feature-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.7) saturate(0.9);
+  transition: transform 0.7s ease;
+}
+
+.feature-img:hover img { transform: scale(1.03); }
+
+.feature-img-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem;
+  background: linear-gradient(to top, rgba(14,31,24,0.9) 0%, transparent 60%);
+}
+
+.feature-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.feature-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ivory);
+  line-height: 1.2;
+}
+
+.feature-text {
+  background: var(--green-mid);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 4rem 3.5rem;
+  border-left: 4px solid var(--gold);
+}
+
+.feature-text .section-eyebrow { margin-bottom: 1rem; }
+
+.feature-text h2 { margin-bottom: 1.25rem; }
+
+.feature-body {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ivory-dim);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.feature-meta {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin-bottom: 2.5rem;
+}
+
+.meta-box {
+  background: var(--green-accent);
+  padding: 0.85rem 1rem;
+  border-radius: 3px;
+}
+
+.meta-box label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.meta-box span {
+  font-size: 0.88rem;
+  color: var(--ivory);
+  font-weight: 400;
+}
+
+/* ── EXPERIENCES ── */
+.experiences {
+  padding: 6rem 3.5rem;
+  background: var(--green-mid);
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+.exp-card {
+  background: var(--green-deep);
+  border: 1px solid var(--ivory-muted);
+  border-radius: 4px;
+  padding: 2rem 1.5rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.exp-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+
+.exp-icon {
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.exp-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ivory);
+  margin-bottom: 0.6rem;
+}
+
+.exp-card p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ivory-dim);
+  line-height: 1.7;
+}
+
+/* ── QUOTE ── */
+.quote-section {
+  padding: 7rem 3.5rem;
+  text-align: center;
+  background: var(--green-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(6rem, 18vw, 18rem);
+  font-weight: 900;
+  color: rgba(201,168,76,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+}
+
+blockquote {
+  position: relative; z-index: 2;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ivory);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.55;
+}
+
+.quote-author {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  color: var(--ivory-dim);
+  font-size: 0.85rem;
+}
+
+.quote-line { width: 2rem; height: 1px; background: var(--gold); }
+
+/* ── NEWSLETTER ── */
+.newsletter {
+  background: var(--gold);
+  padding: 5rem 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.newsletter h2 {
+  color: var(--green-deep);
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+}
+
+.newsletter h2 em { color: var(--green-mid); }
+
+.newsletter-right { display: flex; flex-direction: column; gap: 1rem; }
+
+.newsletter p {
+  font-size: 0.95rem;
+  color: var(--green-mid);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.newsletter-form {
+  display: flex;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 0.9rem 1.25rem;
+  background: rgba(14,31,24,0.12);
+  border: 1.5px solid var(--green-deep);
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.9rem;
+  color: var(--green-deep);
+  outline: none;
+}
+
+.newsletter-form input::placeholder { color: rgba(14,31,24,0.45); }
+
+.newsletter-form button {
+  background: var(--green-deep);
+  color: var(--gold);
+  border: none;
+  padding: 0.9rem 1.5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0 2px 2px 0;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover { background: var(--green-mid); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--green-deep);
+  border-top: 1px solid var(--ivory-muted);
+  padding: 2rem 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ivory-muted);
+}
+
+.footer-links {
+  display: flex; gap: 2rem; list-style: none;
+}
+
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-text > * {
+  animation: fadeUp 0.7s ease both;
+}
+
+.hero-text > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-text > *:nth-child(2) { animation-delay: 0.22s; }
+.hero-text > *:nth-child(3) { animation-delay: 0.34s; }
+.hero-text > *:nth-child(4) { animation-delay: 0.46s; }
+.hero-text > *:nth-child(5) { animation-delay: 0.58s; }
+
+.hero-visual { animation: fadeUp 0.9s ease 0.15s both; }
+
+/* ── HAMBURGER BUTTON (hidden on desktop) ── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 200;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%; height: 1.5px;
+  background: var(--ivory);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── MOBILE DRAWER ── */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0;
+  background: rgba(14,31,24,0.98);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--ivory-muted);
+  padding: 2rem 1.5rem;
+  z-index: 99;
+  flex-direction: column;
+  gap: 0;
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.mobile-menu.open {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ivory-dim);
+  text-decoration: none;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--ivory-muted);
+  transition: color 0.2s;
+}
+
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--gold); }
+
+.mobile-menu .mob-cta {
+  margin-top: 1.25rem;
+  background: var(--gold);
+  color: var(--green-deep) !important;
+  text-align: center;
+  padding: 0.9rem 1.5rem;
+  border-radius: 2px;
+  font-weight: 700;
+  border-bottom: none !important;
+}
+
+/* ── TABLET: ≤ 1024px ── */
+@media (max-width: 1024px) {
+  nav { padding: 0 1.5rem; }
+
+  .nav-links, .nav-btn { display: none; }
+  .nav-toggle { display: flex; }
+
+  /* Hero stacks */
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-visual {
+    height: 55vw;
+    min-height: 280px;
+    max-height: 440px;
+    order: -1;
+  }
+
+  .hero-visual::before {
+    background: linear-gradient(to top, var(--green-deep) 0%, transparent 50%);
+  }
+
+  .hero-text {
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .hero-sub { max-width: 100%; }
+
+  /* Feature strip stacks */
+  .feature-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-img {
+    min-height: 300px;
+    max-height: 420px;
+  }
+
+  .feature-text {
+    border-left: none;
+    border-top: 4px solid var(--gold);
+    padding: 3rem 2rem;
+  }
+
+  /* Newsletter stacks */
+  .newsletter {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 4rem 2rem;
+  }
+
+  /* Exp grid 2 col */
+  .exp-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Destinations padding */
+  .destinations { padding: 4rem 1.5rem; }
+  .experiences { padding: 4rem 1.5rem; }
+  .quote-section { padding: 5rem 2rem; }
+}
+
+/* ── MOBILE: ≤ 640px ── */
+@media (max-width: 640px) {
+  nav { padding: 0 1.25rem; height: 60px; }
+
+  .mobile-menu { top: 60px; }
+
+  /* Hero */
+  .hero-visual {
+    height: 65vw;
+    min-height: 240px;
+  }
+
+  .hero-text { padding: 2rem 1.25rem 3rem; }
+
+  .hero h1 { font-size: clamp(2.8rem, 11vw, 4rem); }
+
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+
+  .hero-stats { gap: 0; }
+  .stat { padding-right: 1rem; margin-right: 1rem; }
+  .stat-n { font-size: 1.5rem; }
+
+  /* Hide pills on very small screens */
+  .hero-pill-top { display: none; }
+  .hero-pill-bottom { bottom: 1rem; right: 1rem; }
+
+  /* Section headers stack */
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .link-all { margin-left: 0; }
+
+  /* Menu items: collapse to 2-col grid */
+  .menu-item {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.75rem 1rem;
+    padding: 1.25rem 0;
+  }
+
+  .menu-num { display: none; }
+
+  .menu-content { grid-column: 1; grid-row: 1; }
+
+  .menu-tags {
+    grid-column: 1;
+    grid-row: 2;
+    justify-content: flex-start;
+  }
+
+  .menu-arrow {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+
+  .menu-thumb { width: 48px; height: 48px; }
+  .menu-city { font-size: 1.15rem; }
+  .menu-dish { display: none; }
+
+  /* Feature */
+  .feature-img { min-height: 240px; max-height: 320px; }
+  .feature-text { padding: 2.5rem 1.25rem; }
+  .feature-meta { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  /* Exp grid single col */
+  .exp-grid { grid-template-columns: 1fr; }
+
+  /* Quote */
+  .quote-section { padding: 4rem 1.25rem; }
+  blockquote { font-size: clamp(1.1rem, 4.5vw, 1.4rem); }
+
+  /* Newsletter */
+  .newsletter { padding: 3rem 1.25rem; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form input {
+    border-right: 1.5px solid var(--green-deep);
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+  }
+  .newsletter-form button { border-radius: 0 0 2px 2px; text-align: center; }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .footer-links { gap: 1.25rem; flex-wrap: wrap; }
+
+  /* Sections */
+  .destinations { padding: 3rem 1.25rem; }
+  .experiences { padding: 3rem 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-inner { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Saveur<sup>™</sup></div>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#feature">Dish of the Month</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#stories">Stories</a></li>
+  </ul>
+  <a href="#newsletter" class="nav-btn">Subscribe</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#destinations" class="mob-link">Destinations</a>
+  <a href="#feature" class="mob-link">Dish of the Month</a>
+  <a href="#experiences" class="mob-link">Experiences</a>
+  <a href="#stories" class="mob-link">Stories</a>
+  <a href="#newsletter" class="mob-cta">Subscribe Free</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-line"></span>
+      <span class="eyebrow-text">The World on a Plate</span>
+    </div>
+    <h1>
+      Eat.<br>
+      Explore.<br>
+      <em>Remember.</em>
+    </h1>
+    <p class="hero-sub">A curated guide to the world's most extraordinary food destinations — from Michelin-starred temples to roadside stalls that changed lives.</p>
+    <div class="hero-actions">
+      <a href="#destinations" class="btn-gold">Explore Destinations</a>
+      <a href="#experiences" class="btn-ghost">Our Experiences →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-n">130+</div>
+        <div class="stat-l">Countries</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">6,200</div>
+        <div class="stat-l">Dishes Mapped</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">100%</div>
+        <div class="stat-l">Local-Verified</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <img class="hero-main-img"
+      src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=85"
+      alt="World food spread">
+
+    <div class="hero-pill hero-pill-top">
+      <div class="pill-label">Trending Now</div>
+      <div class="pill-value">Oaxacan Mole, Mexico</div>
+    </div>
+
+    <div class="hero-pill hero-pill-bottom">
+      <div class="pill-thumb">
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=120&q=80" alt="Bangkok">
+      </div>
+      <div>
+        <div class="pill-label">Latest Guide</div>
+        <div class="pill-value">Bangkok Street Food</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="marquee-item">Tokyo Ramen <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mumbai Street Food <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Lyon Bouchons <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Istanbul Bazaar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Oaxaca Mole <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Marrakech Souks <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Kyoto Kaiseki <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Naples Pizza <span class="marquee-dot"></span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Tokyo Ramen <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mumbai Street Food <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Lyon Bouchons <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Istanbul Bazaar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Oaxaca Mole <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Marrakech Souks <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Kyoto Kaiseki <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Naples Pizza <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- DESTINATIONS (menu style) -->
+<section class="destinations" id="destinations">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Top Picks This Season</div>
+      <h2>Where should <em>you eat</em> next?</h2>
+    </div>
+    <a href="#" class="link-all">All destinations →</a>
+  </div>
+
+  <div class="menu-list">
+
+    <a href="#" class="menu-item">
+      <span class="menu-num">01</span>
+      <div class="menu-content">
+        <div class="menu-thumb">
+          <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=200&q=80" alt="Tokyo">
+        </div>
+        <div class="menu-info">
+          <div class="menu-country">🇯🇵 Japan</div>
+          <div class="menu-city">Tokyo</div>
+          <div class="menu-dish">Signature: Tonkotsu Ramen at Ichiran, Shibuya</div>
+        </div>
+      </div>
+      <div class="menu-tags">
+        <span class="mtag">Umami</span>
+        <span class="mtag">Noodles</span>
+        <span class="mtag sweet">Wagashi</span>
+      </div>
+      <span class="menu-arrow">→</span>
+    </a>
+
+    <a href="#" class="menu-item">
+      <span class="menu-num">02</span>
+      <div class="menu-content">
+        <div class="menu-thumb">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&q=80" alt="Mexico City">
+        </div>
+        <div class="menu-info">
+          <div class="menu-country">🇲🇽 Mexico</div>
+          <div class="menu-city">Mexico City</div>
+          <div class="menu-dish">Signature: Tacos al Pastor from El Huequito, Centro</div>
+        </div>
+      </div>
+      <div class="menu-tags">
+        <span class="mtag hot">🌶 Spicy</span>
+        <span class="mtag">Tacos</span>
+        <span class="mtag">Markets</span>
+      </div>
+      <span class="menu-arrow">→</span>
+    </a>
+
+    <a href="#" class="menu-item">
+      <span class="menu-num">03</span>
+      <div class="menu-content">
+        <div class="menu-thumb">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&q=80" alt="Istanbul">
+        </div>
+        <div class="menu-info">
+          <div class="menu-country">🇹🇷 Turkey</div>
+          <div class="menu-city">Istanbul</div>
+          <div class="menu-dish">Signature: Balık Ekmek by the Galata Bridge at dusk</div>
+        </div>
+      </div>
+      <div class="menu-tags">
+        <span class="mtag">Spice Bazaar</span>
+        <span class="mtag">Seafood</span>
+        <span class="mtag sweet">Baklava</span>
+      </div>
+      <span class="menu-arrow">→</span>
+    </a>
+
+    <a href="#" class="menu-item">
+      <span class="menu-num">04</span>
+      <div class="menu-content">
+        <div class="menu-thumb">
+          <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=200&q=80" alt="Bangkok">
+        </div>
+        <div class="menu-info">
+          <div class="menu-country">🇹🇭 Thailand</div>
+          <div class="menu-city">Bangkok</div>
+          <div class="menu-dish">Signature: Pad See Ew, Chinatown Night Market</div>
+        </div>
+      </div>
+      <div class="menu-tags">
+        <span class="mtag hot">🌶 Spicy</span>
+        <span class="mtag veg">🌿 Veg options</span>
+        <span class="mtag">Street food</span>
+      </div>
+      <span class="menu-arrow">→</span>
+    </a>
+
+    <a href="#" class="menu-item">
+      <span class="menu-num">05</span>
+      <div class="menu-content">
+        <div class="menu-thumb">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80" alt="Lyon">
+        </div>
+        <div class="menu-info">
+          <div class="menu-country">🇫🇷 France</div>
+          <div class="menu-city">Lyon</div>
+          <div class="menu-dish">Signature: Quenelles de Brochet at a traditional Bouchon</div>
+        </div>
+      </div>
+      <div class="menu-tags">
+        <span class="mtag">Fine Dining</span>
+        <span class="mtag">Bouchons</span>
+        <span class="mtag sweet">Tarte aux pralines</span>
+      </div>
+      <span class="menu-arrow">→</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- FEATURE: DISH OF THE MONTH -->
+<section class="feature-strip" id="feature">
+  <div class="feature-img">
+    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=85" alt="Dish of the month">
+    <div class="feature-img-overlay">
+      <div class="feature-tag">Dish of the Month — July 2026</div>
+      <div class="feature-title">Tonkotsu Ramen,<br>Tokyo</div>
+    </div>
+  </div>
+  <div class="feature-text">
+    <div class="section-eyebrow">Deep Dive</div>
+    <h2>Eighteen hours of <em>devotion</em></h2>
+    <p class="feature-body">
+      In the back alleys of Shinjuku, a single bowl of tonkotsu ramen represents a craft passed down through generations. The broth alone demands eighteen hours of simmering — pork bones coaxed into a silk-white emulsion that coats the mouth without heaviness. Every element is deliberate: noodles calibrated to the broth's viscosity, tare measured by eye, toppings arranged in silence.
+    </p>
+    <div class="feature-meta">
+      <div class="meta-box">
+        <label>Origin</label>
+        <span>Fukuoka, Kyushu, Japan</span>
+      </div>
+      <div class="meta-box">
+        <label>Prep Time</label>
+        <span>18+ hours</span>
+      </div>
+      <div class="meta-box">
+        <label>Best Season</label>
+        <span>Winter (Dec–Feb)</span>
+      </div>
+      <div class="meta-box">
+        <label>Price Range</label>
+        <span>¥800–¥1,800</span>
+      </div>
+    </div>
+    <a href="#" class="btn-gold">Read the full story</a>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="experiences" id="experiences">
+  <div class="section-header" style="border-bottom-color: rgba(245,240,232,0.15);">
+    <div>
+      <div class="section-eyebrow">What We Offer</div>
+      <h2>More than a meal, <em>a memory</em></h2>
+    </div>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <span class="exp-icon">🍳</span>
+      <h3>Cooking Classes</h3>
+      <p>Step into a local kitchen. Real homes, real recipes, real technique handed down over decades.</p>
+    </div>
+    <div class="exp-card">
+      <span class="exp-icon">🗺️</span>
+      <h3>Food Tours</h3>
+      <p>Curated walks through the most flavourful neighbourhoods on earth, led by people who grew up there.</p>
+    </div>
+    <div class="exp-card">
+      <span class="exp-icon">📖</span>
+      <h3>Recipe Guides</h3>
+      <p>Illustrated field guides so you can recreate the exact dish that stopped you in your tracks.</p>
+    </div>
+    <div class="exp-card">
+      <span class="exp-icon">🌾</span>
+      <h3>Farm Visits</h3>
+      <p>Follow your food back to its source — vineyards, spice farms, and trawler docks at dawn.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section" id="stories">
+  <div class="quote-bg-text" aria-hidden="true">EAT</div>
+  <blockquote>
+    "Saveur didn't just tell me where to eat in Istanbul — it told me why. I cried over a bowl of lentil soup in an alley I never would have found alone."
+  </blockquote>
+  <div class="quote-author">
+    <span class="quote-line"></span>
+    <span>Amélie Fontaine &nbsp;·&nbsp; Food writer, Lyon</span>
+    <span class="quote-line"></span>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div>
+    <div class="section-eyebrow" style="color:var(--green-mid); margin-bottom:0.6rem;">Join 80,000 readers</div>
+    <h2>The world's best<br>food stories, <em>weekly</em></h2>
+  </div>
+  <div class="newsletter-right">
+    <p>Dispatches from kitchens, markets, and back-alley restaurants across 60+ countries — every Friday morning.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com" aria-label="Email address">
+      <button type="button">Subscribe →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo" style="font-size:1rem; color:var(--ivory-dim);">Saveur<sup style="color:var(--gold); font-size:0.45rem;">™</sup></div>
+  <span class="footer-copy">© 2026 Saveur Food Travel. Eat well, travel often.</span>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Instagram</a></li>
+  </ul>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu   = document.getElementById('mobileMenu');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+    menu.setAttribute('aria-hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close on any link click inside mobile menu
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+</body>
+</html>
